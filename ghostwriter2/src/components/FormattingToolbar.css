@@ -1,0 +1,329 @@
+/* Formatting Toolbar */
+.formatting-toolbar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.formatting-toolbar.fixed-toolbar {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: toolbarFadeIn 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes toolbarSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes toolbarFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Toolbar Section */
+.toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Toolbar Groups */
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px;
+}
+
+.toolbar-group:first-child {
+  padding-left: 0;
+}
+
+.toolbar-group:last-child {
+  padding-right: 0;
+}
+
+/* Ghost Branding */
+.toolbar-ghost {
+  font-size: 16px;
+  padding: 0 4px;
+  opacity: 0.8;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Toolbar Divider */
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.12) 20%,
+    rgba(0, 0, 0, 0.12) 80%,
+    transparent
+  );
+  margin: 0 8px;
+}
+
+/* Format Buttons */
+.format-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  font-family: inherit;
+}
+
+.format-button:hover {
+  background: rgba(35, 108, 255, 0.08);
+  color: #236CFF;
+  transform: translateY(-1px);
+}
+
+.format-button:active {
+  transform: translateY(0);
+  transition: transform 0.05s ease;
+}
+
+.format-button.active {
+  background: #236CFF;
+  color: white;
+  box-shadow: 
+    0 2px 8px rgba(35, 108, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.format-button.active:hover {
+  background: #1D5FE6;
+  transform: translateY(-1px);
+}
+
+/* Format Icons */
+.format-icon {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Specific Format Button Styles */
+.format-bold .format-icon {
+  font-weight: 800;
+  font-family: 'Charter', 'Georgia', serif;
+}
+
+.format-italic .format-icon {
+  font-style: italic;
+  font-family: 'Charter', 'Georgia', serif;
+}
+
+.format-underline .format-icon {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.format-strikethrough .format-icon {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+/* Spacing Controls */
+.spacing-controls {
+  gap: 8px;
+}
+
+.spacing-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.spacing-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.spacing-select {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: white;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 6px;
+  min-width: 48px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.spacing-select:hover {
+  border-color: #236CFF;
+  box-shadow: 0 0 0 1px rgba(35, 108, 255, 0.1);
+}
+
+.spacing-select:focus {
+  outline: none;
+  border-color: #236CFF;
+  box-shadow: 0 0 0 2px rgba(35, 108, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .formatting-toolbar {
+    padding: 6px 10px;
+    border-radius: 10px;
+  }
+  
+  .format-button {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .format-icon {
+    font-size: 12px;
+  }
+  
+  .toolbar-divider {
+    height: 20px;
+    margin: 0 6px;
+  }
+  
+  .spacing-control {
+    gap: 1px;
+  }
+  
+  .spacing-label {
+    font-size: 9px;
+  }
+  
+  .spacing-select {
+    font-size: 10px;
+    padding: 3px 5px;
+    min-width: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formatting-toolbar {
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+  
+  .toolbar-group {
+    gap: 1px;
+    padding: 0 2px;
+  }
+  
+  .toolbar-divider {
+    margin: 0 4px;
+  }
+  
+  .format-button {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .spacing-controls {
+    gap: 6px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .formatting-toolbar {
+    background: rgba(38, 38, 38, 0.98);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .toolbar-divider {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0.15) 80%,
+      transparent
+    );
+  }
+  
+  .format-button {
+    color: #cbd5e1;
+  }
+  
+  .format-button:hover {
+    background: rgba(35, 108, 255, 0.15);
+    color: #236CFF;
+  }
+  
+  .format-button.active {
+    background: #236CFF;
+    color: white;
+  }
+  
+  .format-button.active:hover {
+    background: #1D5FE6;
+  }
+  
+  .spacing-label {
+    color: #9ca3af;
+  }
+  
+  .spacing-select {
+    background: #374151;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #e5e7eb;
+  }
+  
+  .spacing-select:hover {
+    border-color: #236CFF;
+    box-shadow: 0 0 0 1px rgba(35, 108, 255, 0.2);
+  }
+  
+  .spacing-select:focus {
+    border-color: #236CFF;
+    box-shadow: 0 0 0 2px rgba(35, 108, 255, 0.3);
+  }
+}

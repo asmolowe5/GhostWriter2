@@ -1,0 +1,436 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #fafafa;
+  color: #2c2c2c;
+}
+
+/* App container */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+}
+
+/* Header */
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00254A;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.word-count,
+.chapter-count {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  letter-spacing: 0.25px;
+}
+
+/* Writing Workspace - Three Panel Layout */
+.writing-workspace {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+/* Chapter Panel */
+.chapter-panel {
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+}
+
+/* Editor Section */
+.editor-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 800px;
+  max-width: 800px;
+  min-width: 600px;
+  flex-shrink: 0;
+}
+
+.editor-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.chapter-header {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 12px 12px 0 0;
+  padding: 20px 24px 16px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.current-chapter-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00254A;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.chapter-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chapter-word-count {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: rgba(35, 108, 255, 0.1);
+  color: #236CFF;
+  border-radius: 12px;
+  letter-spacing: 0.25px;
+}
+
+/* GhostWriter Panel */
+.ghostwriter-panel {
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .writing-workspace {
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .chapter-panel {
+    min-width: 220px;
+    max-width: 280px;
+  }
+  
+  .editor-section {
+    width: 700px;
+    max-width: 700px;
+    min-width: 550px;
+  }
+  
+  .ghostwriter-panel {
+    min-width: 280px;
+    max-width: 320px;
+  }
+  
+  .header-content {
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .writing-workspace {
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .chapter-panel {
+    min-width: 200px;
+    max-width: 260px;
+  }
+  
+  .editor-section {
+    width: 600px;
+    max-width: 600px;
+    min-width: 500px;
+  }
+  
+  .ghostwriter-panel {
+    min-width: 260px;
+    max-width: 300px;
+  }
+  
+  .chapter-header {
+    padding: 16px 20px 12px 20px;
+  }
+  
+  .current-chapter-title {
+    font-size: 16px;
+  }
+  
+  .chapter-word-count {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 20px;
+    height: 56px;
+  }
+  
+  .app-title {
+    font-size: 20px;
+  }
+  
+  .header-stats {
+    gap: 12px;
+  }
+  
+  .word-count,
+  .chapter-count {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+  
+  .writing-workspace {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    height: calc(100vh - 56px);
+  }
+  
+  .chapter-panel {
+    order: 1;
+    height: auto;
+    max-height: 200px;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+  
+  .editor-section {
+    order: 2;
+    height: auto;
+    flex: 1;
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+  }
+  
+  .ghostwriter-panel {
+    order: 3;
+    height: auto;
+    max-height: 300px;
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+  
+  .chapter-header {
+    padding: 14px 18px 10px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .app-header {
+    height: auto;
+    padding: 16px 20px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: #1a1a1a;
+    color: #e0e0e0;
+  }
+  
+  .app {
+    background: linear-gradient(135deg, #1a1a1a 0%, #161616 100%);
+  }
+  
+  .app-header {
+    background: rgba(26, 26, 26, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .app-title {
+    color: #ffffff;
+  }
+  
+  .word-count {
+    color: #b0b0b0;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Project Selection Screen */
+.project-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 32px;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+}
+
+.project-selection-content {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.app-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin: 16px 0 48px 0;
+  font-weight: 400;
+}
+
+.project-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.project-button {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.project-button.primary {
+  background: #236CFF;
+  color: white;
+  box-shadow: 0 4px 12px rgba(35, 108, 255, 0.3);
+}
+
+.project-button.primary:hover {
+  background: #1D5FE6;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(35, 108, 255, 0.4);
+}
+
+.project-button.secondary {
+  background: white;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-button.secondary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-info {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 16px;
+  color: #666;
+  font-size: 14px;
+}
+
+.project-info code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 13px;
+}
+
+/* Header Updates */
+.project-name {
+  font-weight: 400;
+  color: #666;
+  font-size: 18px;
+}
+
+.header-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.header-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.save-status {
+  font-size: 12px;
+  color: #666;
+  margin-left: 12px;
+}
