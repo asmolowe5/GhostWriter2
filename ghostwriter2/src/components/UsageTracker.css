@@ -1,0 +1,253 @@
+/* Usage Tracker */
+.usage-tracker {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.usage-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #00254A;
+}
+
+.refresh-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.refresh-button:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Loading and Error States */
+.usage-loading,
+.usage-error {
+  padding: 24px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.usage-error {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Usage Sections */
+.usage-section {
+  margin-bottom: 20px;
+}
+
+.usage-section:last-child {
+  margin-bottom: 0;
+}
+
+.usage-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Usage Summary Metrics */
+.usage-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.usage-metric {
+  flex: 1;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 8px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.metric-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #00254A;
+  margin-bottom: 4px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Provider Breakdown */
+.provider-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.provider-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+
+.provider-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
+.provider-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.provider-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.provider-usage {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* No Usage State */
+.no-usage {
+  text-align: center;
+  padding: 32px 16px;
+  color: #9ca3af;
+}
+
+.no-usage p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.no-usage small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .usage-tracker {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .usage-summary {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .usage-metric {
+    padding: 10px;
+  }
+
+  .metric-value {
+    font-size: 16px;
+  }
+
+  .provider-stat {
+    padding: 6px;
+  }
+
+  .provider-indicator {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .usage-tracker {
+    background: rgba(31, 41, 55, 0.95);
+    border-color: #374151;
+  }
+
+  .usage-header h3 {
+    color: #f9fafb;
+  }
+
+  .usage-section h4 {
+    color: #d1d5db;
+  }
+
+  .usage-metric {
+    background: #374151;
+    border-color: #4b5563;
+  }
+
+  .metric-value {
+    color: #f9fafb;
+  }
+
+  .metric-label {
+    color: #9ca3af;
+  }
+
+  .provider-stat {
+    background: #374151;
+    border-color: #4b5563;
+  }
+
+  .provider-name {
+    color: #d1d5db;
+  }
+
+  .provider-usage {
+    color: #9ca3af;
+  }
+
+  .usage-error {
+    background: #2d1b1b;
+    border-color: #7f1d1d;
+    color: #fca5a5;
+  }
+
+  .no-usage {
+    color: #6b7280;
+  }
+}

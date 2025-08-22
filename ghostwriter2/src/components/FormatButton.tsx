@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface FormatButtonProps {
   icon: string;
@@ -22,10 +22,13 @@ const FormatButton: React.FC<FormatButtonProps> = ({
       title={title}
       onClick={onClick}
       onMouseDown={(e) => e.preventDefault()} // Prevent editor blur
+      aria-label={title}
+      aria-pressed={isActive}
+      role="button"
     >
-      <span className="format-icon">{icon}</span>
+      <span className="format-icon" aria-hidden="true">{icon}</span>
     </button>
   );
 };
 
-export default FormatButton;
+export default memo(FormatButton);

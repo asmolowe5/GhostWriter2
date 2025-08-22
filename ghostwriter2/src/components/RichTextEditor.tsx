@@ -1,6 +1,7 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, useMemo } from 'react';
 import FormattingToolbar from './FormattingToolbar';
 import './RichTextEditor.css';
+import { calculateWordCount, sanitizeHtmlContent } from '../types/shared';
 
 interface RichTextEditorProps {
   content: string;
@@ -14,16 +15,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   placeholder = "Begin your story..."
 }) => {
   const editorRef = useRef<HTMLDivElement>(null);
-  // Handle content changes
+  // Handle content changes with debouncing
   const handleInput = useCallback(() => {
     if (!editorRef.current) return;
     
-    const htmlContent = editorRef.current.innerHTML;
-    const textContent = editorRef.current.textContent || '';
-    
-    // Calculate word count
-    const words = textContent.trim().split(/\s+/).filter(word => word.length > 0);
-    const wordCount = textContent.trim() === '' ? 0 : words.length;
+    const htmlContent = sanitizeHtmlContent(editorRef.current.innerHTML);
+    const wordCount = calculateWordCount(htmlContent);
     
     onChange(htmlContent, wordCount);
   }, [onChange]);
@@ -96,32 +93,45 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     handleInput();
   }, [handleInput]);
 
-  // Set up event listeners
+  // Set up event listeners - fix memory leak by removing dependency on handleInput
   useEffect(() => {
     const editor = editorRef.current;
     if (!editor) return;
 
-    editor.addEventListener('input', handleInput);
+    const inputHandler = () => {
+      if (!editor) return;
+      
+      const htmlContent = sanitizeHtmlContent(editor.innerHTML);
+      const wordCount = calculateWordCount(htmlContent);
+      
+      onChange(htmlContent, wordCount);
+    };
+
+    editor.addEventListener('input', inputHandler);
 
     return () => {
-      editor.removeEventListener('input', handleInput);
+      editor.removeEventListener('input', inputHandler);
     };
-  }, [handleInput]);
+  }, [onChange]);
 
   // Update content when prop changes (chapter switching)
+  const sanitizedContent = useMemo(() => sanitizeHtmlContent(content), [content]);
+  
   useEffect(() => {
-    if (editorRef.current && editorRef.current.innerHTML !== content) {
-      editorRef.current.innerHTML = content;
-      console.log('RichTextEditor: Updated content from prop change:', content.substring(0, 100) + '...');
+    if (editorRef.current && editorRef.current.innerHTML !== sanitizedContent) {
+      editorRef.current.innerHTML = sanitizedContent;
+      console.log('RichTextEditor: Updated content from prop change:', sanitizedContent.substring(0, 100) + '...');
     }
-  }, [content]);
+  }, [sanitizedContent]);
 
   return (
     <div className="rich-text-editor">
-      <FormattingToolbar
-        onFormat={formatText}
-        onSpacing={applySpacing}
-      />
+      <div className="toolbar-row">
+        <FormattingToolbar
+          onFormat={formatText}
+          onSpacing={applySpacing}
+        />
+      </div>
       
       <div
         ref={editorRef}
@@ -132,7 +142,14 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         data-placeholder={placeholder}
+        role="textbox"
+        aria-multiline="true"
+        aria-label="Story content editor"
+        aria-describedby="editor-help"
       />
+      <div id="editor-help" className="sr-only">
+        Use the formatting toolbar to style your text. Press Tab for indentation.
+      </div>
     </div>
   );
 };

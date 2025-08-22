@@ -1,13 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './GhostWriterAgent.css';
-
-interface Suggestion {
-  id: string;
-  type: 'continuation' | 'improvement' | 'idea' | 'question';
-  text: string;
-  preview?: string;
-  confidence: number;
-}
+import { Suggestion } from '../types/shared';
+import UsageTracker from './UsageTracker';
 
 interface GhostWriterAgentProps {
   isActive: boolean;
@@ -214,6 +208,13 @@ const GhostWriterAgent: React.FC<GhostWriterAgentProps> = ({
               <span className="status-text">Watching your writing</span>
             </div>
           </div>
+
+          {/* Usage Tracking */}
+          <UsageTracker 
+            onRateLimitWarning={(provider, message) => {
+              setGhostMessage(`⚠️ ${message}`);
+            }}
+          />
         </div>
       )}
 

@@ -125,11 +125,66 @@ html, body {
 }
 
 .current-chapter-title {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   color: #00254A;
   margin: 0;
   letter-spacing: -0.3px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chapter-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #236CFF;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chapter-spacer {
+  width: 80px; /* Match word count width for balance */
+}
+
+/* Editable Chapter Title */
+.chapter-title-text {
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.chapter-title-text:hover {
+  background: rgba(35, 108, 255, 0.05);
+}
+
+.chapter-title-input {
+  font-size: 22px;
+  font-weight: 600;
+  color: #00254A;
+  border: 1px solid #236CFF;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background: white;
+  outline: none;
+  font-family: inherit;
+  letter-spacing: -0.3px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.chapter-title-input:focus {
+  box-shadow: 0 0 0 2px rgba(35, 108, 255, 0.2);
 }
 
 .chapter-meta {
@@ -147,6 +202,8 @@ html, body {
   color: #236CFF;
   border-radius: 12px;
   letter-spacing: 0.25px;
+  min-width: 80px;
+  text-align: center;
 }
 
 /* GhostWriter Panel */
@@ -433,4 +490,77 @@ html, body {
   font-size: 12px;
   color: #666;
   margin-left: 12px;
+}
+
+/* Recent Novels Section */
+.recent-novels {
+  margin: 32px 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.recent-novels-title {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #00254A;
+  text-align: center;
+}
+
+.recent-novels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-novel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.recent-novel-item:hover {
+  background: #f8f9fa;
+  border-color: #236CFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(35, 108, 255, 0.15);
+}
+
+.recent-novel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.recent-novel-name {
+  font-weight: 600;
+  color: #00254A;
+  font-size: 14px;
+}
+
+.recent-novel-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.recent-novel-icon {
+  font-size: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.recent-novel-item:hover .recent-novel-icon {
+  opacity: 1;
 }

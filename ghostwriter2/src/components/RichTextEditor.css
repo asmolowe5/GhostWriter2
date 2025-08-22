@@ -8,6 +8,17 @@
   flex-direction: column;
 }
 
+/* Toolbar Row */
+.toolbar-row {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Rich Editor Styling */
 .rich-editor {
   width: 100%;
@@ -15,7 +26,7 @@
   border: none;
   outline: none;
   background: #ffffff;
-  padding: 80px 48px 48px 48px; /* Increased top padding for fixed toolbar */
+  padding: 32px 120px 48px 120px;
   border-radius: 0 0 12px 12px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-top: none;
@@ -94,7 +105,7 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .rich-editor {
-    padding: 64px 24px 32px 24px; /* Adjusted top padding for toolbar */
+    padding: 28px 24px 32px 24px;
     font-size: 16px;
     border-radius: 8px;
   }
@@ -102,7 +113,7 @@
 
 @media (max-width: 480px) {
   .rich-editor {
-    padding: 56px 20px 24px 20px; /* Adjusted top padding for toolbar */
+    padding: 24px 20px 24px 20px;
   }
 }
 

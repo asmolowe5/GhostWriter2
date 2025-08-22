@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import FormatButton from './FormatButton';
 import './FormattingToolbar.css';
 
@@ -58,6 +58,8 @@ const FormattingToolbar: React.FC<FormattingToolbarProps> = ({
     <div 
       className="formatting-toolbar fixed-toolbar"
       onMouseDown={(e) => e.preventDefault()} // Prevent editor blur
+      role="toolbar"
+      aria-label="Text formatting toolbar"
     >
       <div className="toolbar-section">
         <div className="toolbar-group">
@@ -138,6 +140,7 @@ const FormattingToolbar: React.FC<FormattingToolbarProps> = ({
               onChange={(e) => handleLineHeight(e.target.value)}
               className="spacing-select"
               title="Line Height"
+              aria-label="Line height"
             >
               <option value="1.2">1.2</option>
               <option value="1.4">1.4</option>
@@ -157,6 +160,7 @@ const FormattingToolbar: React.FC<FormattingToolbarProps> = ({
               onChange={(e) => handleParagraphSpacing(e.target.value)}
               className="spacing-select"
               title="Paragraph Spacing"
+              aria-label="Paragraph spacing"
             >
               <option value="0.5em">0.5</option>
               <option value="0.75em">0.75</option>
@@ -172,4 +176,4 @@ const FormattingToolbar: React.FC<FormattingToolbarProps> = ({
   );
 };
 
-export default FormattingToolbar;
+export default memo(FormattingToolbar);

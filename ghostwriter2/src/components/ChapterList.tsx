@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import './ChapterList.css';
-
-interface Chapter {
-  id: string;
-  title: string;
-  wordCount: number;
-  isActive: boolean;
-  lastModified: Date;
-}
+import { Chapter, calculateWordCount } from '../types/shared';
 
 interface ChapterListProps {
   chapters: Chapter[];
@@ -27,29 +20,29 @@ const ChapterList: React.FC<ChapterListProps> = ({
   const [editingChapter, setEditingChapter] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
 
-  const startEditing = (chapter: Chapter) => {
+  const startEditing = useCallback((chapter: Chapter) => {
     setEditingChapter(chapter.id);
     setEditTitle(chapter.title);
-  };
+  }, []);
 
-  const finishEditing = () => {
+  const finishEditing = useCallback(() => {
     if (editingChapter && editTitle.trim()) {
       onChapterRename(editingChapter, editTitle.trim());
     }
     setEditingChapter(null);
     setEditTitle('');
-  };
+  }, [editingChapter, editTitle, onChapterRename]);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       finishEditing();
     } else if (e.key === 'Escape') {
       setEditingChapter(null);
       setEditTitle('');
     }
-  };
+  }, [finishEditing]);
 
-  const formatDate = (date: Date) => {
+  const formatDate = useCallback((date: Date) => {
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -58,7 +51,7 @@ const ChapterList: React.FC<ChapterListProps> = ({
     if (days === 1) return 'Yesterday';
     if (days < 7) return `${days} days ago`;
     return date.toLocaleDateString();
-  };
+  }, []);
 
   return (
     <div className="chapter-list">
@@ -113,7 +106,7 @@ const ChapterList: React.FC<ChapterListProps> = ({
                   
                   <div className="chapter-meta">
                     <span className="chapter-words">
-                      {chapter.wordCount.toLocaleString()} words
+                      {calculateWordCount(chapter.content || '').toLocaleString()} words
                     </span>
                     <span className="chapter-date">
                       {formatDate(chapter.lastModified)}
@@ -157,7 +150,7 @@ const ChapterList: React.FC<ChapterListProps> = ({
             {chapters.length} {chapters.length === 1 ? 'chapter' : 'chapters'}
           </span>
           <span className="total-words">
-            {chapters.reduce((sum, ch) => sum + ch.wordCount, 0).toLocaleString()} total words
+            {useMemo(() => chapters.reduce((sum, ch) => sum + calculateWordCount(ch.content || ''), 0).toLocaleString(), [chapters])} total words
           </span>
         </div>
       </div>
